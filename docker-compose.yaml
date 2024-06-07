@@ -1,0 +1,29 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb-ha:pg16
+    container_name: timescaledb
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=aizm
+      - POSTGRES_USER=aizm
+      - POSTGRES_PASSWORD=pass
+    restart: always
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - timescale_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aizm
+
+networks:
+  aizm:
+    name: aizm
+
+volumes:
+  timescale_data:
+    name: timescale_data
