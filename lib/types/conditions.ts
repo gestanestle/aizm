@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-export const machine = z.object({
+export const conditions = z.object({
   id: z.string(),
   time: z.date(),
   temp: z.number(),
   humidity: z.number(),
 });
 
-export type Machine = z.infer<typeof machine>;
+export type Conditions = z.infer<typeof conditions>;
