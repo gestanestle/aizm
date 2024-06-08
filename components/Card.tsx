@@ -27,7 +27,7 @@ export default function Card({
           <h2 className="card-title flex">
             <div className="flex-auto">Machine {id}</div>
             <div className="flex-none">
-              <Adjust />
+              <Adjust id={id} />
             </div>
           </h2>
           <div className="stats stats-vertical shadow">

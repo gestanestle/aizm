@@ -1,6 +1,6 @@
 import Card, { Status } from "@/components/Card";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="bg-gradient-to-br from-violet-950 via-purple-600 to-pink-500">
       <div className="flex justify-center w-full my-4 pt-4">
