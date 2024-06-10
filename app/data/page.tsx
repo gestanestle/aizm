@@ -1,5 +1,6 @@
 import { queryConditions } from "@/lib/server/queries";
-import { Conditions } from "@/lib/types/conditions";
+import { Conditions } from "@/lib/server/types";
+
 export default async function page() {
   const conditions: Conditions[] = await queryConditions.execute({
     id: "0000001",

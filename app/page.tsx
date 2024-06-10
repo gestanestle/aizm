@@ -1,30 +1,45 @@
+import AddMachine from "@/components/AddMachine";
 import Card, { Status } from "@/components/Card";
+import { queryConditions, queryMachines } from "@/lib/server/queries";
+import { Conditions } from "@/lib/server/types";
+import { auth } from "@clerk/nextjs/server";
+
+type CurrentConditions = {
+  id: string;
+  ct: number;
+  ch: number;
+};
 
 export default async function Home() {
+  const { userId } = auth();
+  const machines = await queryMachines.execute({ admin: userId });
+
+  const promises = machines.map(async (m) => {
+    const c: Conditions[] = await queryConditions.execute({
+      id: m.id,
+      limit: 1,
+    });
+    return c[0] ? { id: m.id, ct: c[0].temp, ch: c[0].humidity } : undefined;
+  });
+
+  var data = (await Promise.all(promises)) as CurrentConditions[];
+  data = data.filter((item) => item);
+
   return (
     <main className="bg-gradient-to-br from-violet-950 via-purple-600 to-pink-500">
-      <div className="flex justify-center w-full my-4 pt-4">
-        <button className="btn btn-secondary w-5/6 md:4/6 lg:3/6">
-          Add new machine
-        </button>
-      </div>
+      <AddMachine uid={userId as string} />
       <div className="grid justify-items-center space-y-4">
-        <Card
-          id="0000001"
-          ct={20.1}
-          dt={40.2}
-          ch={56.7}
-          dh={89}
-          s={Status.HEALTHY}
-        />
-        <Card
-          id="0000002"
-          ct={20.1}
-          dt={40.2}
-          ch={56.7}
-          dh={89}
-          s={Status.UNHEALTHY}
-        />
+        {data.map((u) => (
+          <Card
+            key={u.id}
+            id={u.id}
+            ct={u.ct}
+            dt={40.2}
+            ch={u.ch}
+            dh={89}
+            s={Status.HEALTHY}
+          />
+        ))}
       </div>
     </main>
   );

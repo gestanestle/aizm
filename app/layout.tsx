@@ -20,7 +20,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" data-theme="synthwave">
         <body className={inter.className}>
-          <div className="container-mx-auto p-4">
+          <div className="container-mx-auto p-4 ">
             <Navbar />
             {children}
           </div>
