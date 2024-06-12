@@ -1,8 +1,17 @@
-import { InferSelectModel } from "drizzle-orm";
-import { conditions, machines, users } from "./schema";
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { conditions, machines, settings, users } from "./schema";
 
-export type User = typeof users.$inferInsert;
-export type Machine = typeof machines.$inferInsert;
-export type Conditions = typeof conditions.$inferInsert;
+export type SelectUser = InferSelectModel<typeof users>;
+export type SelectMachine = InferSelectModel<typeof machines>;
+export type SelectConditions = InferSelectModel<typeof conditions>;
 
-type SelectUser = InferSelectModel<typeof users>;
+export type InsertUser = InferInsertModel<typeof users>;
+export type InsertMachine = InferInsertModel<typeof machines>;
+export type InsertSettings = InferInsertModel<typeof settings>;
+export type InsertConditions = InferInsertModel<typeof conditions>;
+
+export enum Status {
+  HEALTHY,
+  UNHEALTHY,
+  UNSET,
+}

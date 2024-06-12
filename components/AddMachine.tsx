@@ -1,12 +1,33 @@
 "use client";
 
 import { addMachine } from "@/lib/actions/add-machine";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 
 const initialState = -2;
 
 export default function AddMachine({ uid }: { uid: string }) {
   const [state, formAction] = useFormState(addMachine, initialState);
+  const [isToasting, setIsToasting] = useState(false);
+
+  const closeModal = () =>
+    (document.getElementById("add-machine-modal").open = false);
+
+  useEffect(() => {
+    if (state != -2) setIsToasting(true);
+  }, [state]);
+
+  useEffect(() => {
+    if (isToasting) {
+      const timeoutId = setTimeout(() => {
+        setIsToasting(false);
+      }, 3000);
+
+      return () => clearTimeout(timeoutId);
+    } else {
+      closeModal();
+    }
+  }, [isToasting]);
 
   return (
     <div>
@@ -14,28 +35,30 @@ export default function AddMachine({ uid }: { uid: string }) {
       <div className="flex justify-center w-full my-4 pt-4">
         <button
           className="btn btn-secondary w-5/6 md:4/6 lg:3/6"
-          onClick={() => document.getElementById("modal").showModal()}
+          onClick={() =>
+            document.getElementById("add-machine-modal").showModal()
+          }
         >
           Add new machine
         </button>
       </div>
-      <dialog id="modal" className="modal">
+      <dialog id="add-machine-modal" className="modal">
         <div className="modal-box grid justify-items-center items-center h-1/2">
-          {state === 1 && (
+          {state === 1 && isToasting && (
             <div className="toast toast-top toast-center">
               <div className="alert alert-info">
                 <span>Machine sucessfully registered.</span>
               </div>
             </div>
           )}
-          {state === 0 && (
+          {state === 0 && isToasting && (
             <div className="toast toast-top toast-center">
               <div className="alert alert-warning">
                 <span>Invalid key. Machine already exists.</span>
               </div>
             </div>
           )}
-          {state === -1 && (
+          {state === -1 && isToasting && (
             <div className="toast toast-top toast-center">
               <div className="alert alert-error">
                 <span>
@@ -71,6 +94,12 @@ export default function AddMachine({ uid }: { uid: string }) {
 
             <input name="admin" value={uid} readOnly hidden />
           </form>
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={closeModal}
+          >
+            ✕
+          </button>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>

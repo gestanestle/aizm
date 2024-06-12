@@ -6,9 +6,15 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS machines(
   id        VARCHAR(255)    PRIMARY KEY,
-  admin     VARCHAR(255)    REFERENCES users(id),
-  dTemp     REAL            NOT NULL,
-  dHumidity REAL            NOT NULL
+  admin     VARCHAR(255)    REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS settings(
+  id        VARCHAR(255)    PRIMARY KEY REFERENCES machines(id),
+  temp      REAL            NOT NULL,
+  humidity  REAL            NOT NULL,
+  tRange    INT             NOT NULL,
+  hRange    INT             NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS conditions(
@@ -26,8 +32,14 @@ SELECT create_hypertable('conditions', 'time');
 SET timezone = 'Asia/Manila';
 
 INSERT INTO users (id, fname, lname) VALUES ('user_2hVaCGfUGYaSedQkrWqv5UFLvp8', 'nestle', 'krim');
-INSERT INTO machines (id, admin) VALUES ('0000001', 'user_2hVaCGfUGYaSedQkrWqv5UFLvp8', 25.2, 43.1);
+
+INSERT INTO machines (id, admin) VALUES ('0000001', 'user_2hVaCGfUGYaSedQkrWqv5UFLvp8');
+INSERT INTO machines (id, admin) VALUES ('0000002', 'user_2hVaCGfUGYaSedQkrWqv5UFLvp8');
+
+INSERT INTO settings (id, temp, humidity, tRange, hRange) VALUES ('0000001', 24.5, 50.2, 2, 5);
+INSERT INTO settings (id, temp, humidity, tRange, hRange) VALUES ('0000002', 21.0, 40, 2, 5);
+
 INSERT INTO conditions (id, time, temp, humidity) VALUES ('0000001', '2024-06-05 14:30:00-08', 25.9, 69.1);
 INSERT INTO conditions (id, time, temp, humidity) VALUES ('0000001', '2024-06-05 14:32:00-08', 17.3, 50.4);
-INSERT INTO conditions (id, time, temp, humidity) VALUES ('0000001', '2024-06-05 14:34:00-08', 22.0, 42.2);
+INSERT INTO conditions (id, time, temp, humidity) VALUES ('0000002', '2024-06-05 14:34:00-08', 22.0, 42.2);
 

@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Adjust from "./Adjust";
+import { Status } from "@/lib/server/types";
 
-export enum Status {
-  HEALTHY,
-  UNHEALTHY,
-}
 export default function Card({
   id,
   ct,
   dt,
   ch,
   dh,
+  dtr,
+  dhr,
   s,
 }: {
   id: string;
@@ -18,6 +17,8 @@ export default function Card({
   dt: number;
   ch: number;
   dh: number;
+  dtr: number;
+  dhr: number;
   s: Status;
 }) {
   return (
@@ -27,7 +28,7 @@ export default function Card({
           <h2 className="card-title flex">
             <div className="flex-auto">Machine {id}</div>
             <div className="flex-none">
-              <Adjust id={id} />
+              <Adjust key={id} id={id} />
             </div>
           </h2>
           <div className="stats stats-vertical shadow">
@@ -44,7 +45,9 @@ export default function Card({
               </div>
               <div className="stat-title">Temperature</div>
               <div className="stat-value text-primary">{ct} &deg;C</div>
-              <div className="stat-desc">Desired temp: {dt} &deg;C</div>
+              <div className="stat-desc">
+                Desired temp: {dt} &deg;C &plusmn; {dtr}
+              </div>
             </div>
 
             <div className="stat gap-y-2">
@@ -60,7 +63,9 @@ export default function Card({
               </div>
               <div className="stat-title">Humidity</div>
               <div className="stat-value text-secondary">{ch}</div>
-              <div className="stat-desc">Desired humidity: {dh} %</div>
+              <div className="stat-desc">
+                Desired humidity: {dh} % &plusmn; {dhr}
+              </div>
             </div>
           </div>
           <div className="container-fluid h-12 border-y-2 border-indigo-200 mt-4">
@@ -73,6 +78,11 @@ export default function Card({
               {s == Status.UNHEALTHY && (
                 <p className="text-center">
                   Status: <span className="text-red-600">UNHEALTHY</span>
+                </p>
+              )}
+              {s == Status.UNSET && (
+                <p className="text-center">
+                  Status: <span className="text-yellow-600">UNSET</span>
                 </p>
               )}
             </div>
