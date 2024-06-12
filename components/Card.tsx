@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Adjust from "./Adjust";
 import { Status } from "@/lib/server/types";
+import dynamic from "next/dynamic";
+
+const ChartNoSSR = dynamic(() => import("@/components/Chart"), { ssr: false });
 
 export default function Card({
   id,
@@ -22,7 +25,7 @@ export default function Card({
   s: Status;
 }) {
   return (
-    <div className="w-5/6 md:4/6 lg:3/6">
+    <div className="w-5/6">
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title flex">
@@ -43,10 +46,14 @@ export default function Card({
                   priority
                 />
               </div>
-              <div className="stat-title">Temperature</div>
+              <div className="stat-title">
+                <p className="font-semibold">Temperature</p>
+              </div>
               <div className="stat-value text-primary">{ct} &deg;C</div>
               <div className="stat-desc">
-                Desired temp: {dt} &deg;C &plusmn; {dtr}
+                <p className="text-sm">
+                  Desired temp: {dt} &deg;C &plusmn; {dtr}
+                </p>
               </div>
             </div>
 
@@ -61,13 +68,21 @@ export default function Card({
                   priority
                 />
               </div>
-              <div className="stat-title">Humidity</div>
+              <div className="stat-title">
+                <p className="font-semibold">Humidity</p>
+              </div>
               <div className="stat-value text-secondary">{ch}</div>
               <div className="stat-desc">
-                Desired humidity: {dh} % &plusmn; {dhr}
+                <p className="text-sm">
+                  Desired humidity: {dh} % &plusmn; {dhr}
+                </p>
               </div>
             </div>
           </div>
+          <div className="hidden md:block bg-base-300 rounded-lg p-4">
+            <ChartNoSSR id={id} />
+          </div>
+
           <div className="container-fluid h-12 border-y-2 border-indigo-200 mt-4">
             <div className="flex justify-center items-center h-full">
               {s == Status.HEALTHY && (

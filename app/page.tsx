@@ -62,7 +62,7 @@ export default async function Home() {
   return (
     <main className="bg-gradient-to-br from-violet-950 via-purple-600 to-pink-500">
       <AddMachine uid={userId as string} />
-      <div className="grid justify-items-center space-y-4">
+      <div className="grid grid-cols-1  xl:grid-cols-2 justify-items-center gap-y-4">
         {data.map((card) => (
           <Card
             key={card.id}

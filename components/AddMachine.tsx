@@ -34,7 +34,7 @@ export default function AddMachine({ uid }: { uid: string }) {
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <div className="flex justify-center w-full my-4 pt-4">
         <button
-          className="btn btn-secondary w-5/6 md:4/6 lg:3/6"
+          className="btn btn-secondary w-5/6"
           onClick={() =>
             document.getElementById("add-machine-modal").showModal()
           }
