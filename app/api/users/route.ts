@@ -1,11 +1,11 @@
 import { insertUser } from "@/lib/server/mutations";
-import { User } from "@/lib/server/types";
+import { InsertUser } from "@/lib/server/types";
 
 export async function POST(request: Request) {
   const req = await request.json();
 
   try {
-    const user: User = {
+    const user: InsertUser = {
       id: req.data.id,
       fname: req.data.first_name,
       lname: req.data.last_name,
@@ -16,4 +16,6 @@ export async function POST(request: Request) {
   } catch (err) {
     console.log(err);
   }
+
+  return Response.json({ status: 200 });
 }
