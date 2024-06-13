@@ -15,7 +15,7 @@ export default function Adjust({ id }: { id: string }) {
   const pass = process.env.NEXT_PUBLIC_MQTT_PASS;
   const host = process.env.NEXT_PUBLIC_MQTT_HOST;
   const port = process.env.NEXT_PUBLIC_MQTT_PORT;
-  const topic = process.env.NEXT_PUBLIC_MQTT_TOPIC;
+  const topic = "aizm/settings";
 
   const client = mqtt.connect(String("ws://" + host + "/mqtt"), {
     protocol: "ws",
@@ -38,9 +38,9 @@ export default function Adjust({ id }: { id: string }) {
       humidityRange: humidityRange,
     };
     client.on("connect", () => {
-      client.subscribe(String(topic), (err) => {
+      client.subscribe(topic, (err) => {
         if (!err) {
-          client.publish(String(topic), JSON.stringify(payload));
+          client.publish(topic, JSON.stringify(payload));
           console.log("Publish successful!");
         } else {
           console.log(err);

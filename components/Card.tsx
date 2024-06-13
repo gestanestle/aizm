@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Adjust from "./Adjust";
 import { Status } from "@/lib/server/types";
-import dynamic from "next/dynamic";
-
-const ChartNoSSR = dynamic(() => import("@/components/Chart"), { ssr: false });
+import Monitoring from "./Monitoring";
 
 export default function Card({
   id,
@@ -80,7 +78,7 @@ export default function Card({
             </div>
           </div>
           <div className="hidden md:block bg-base-300 rounded-lg p-4">
-            <ChartNoSSR id={id} />
+            <Monitoring id={id} />
           </div>
 
           <div className="container-fluid h-12 border-y-2 border-indigo-200 mt-4">

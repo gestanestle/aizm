@@ -1,5 +1,6 @@
 "use client";
 
+import { FormattedState } from "@/lib/server/types";
 import {
   Area,
   AreaChart,
@@ -10,23 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-const data: { time: string; temperature: number; humidity: number }[] = [];
-
-const startTime = new Date();
-
-for (let i = 0; i < 15; i++) {
-  const time = new Date(startTime.getTime() + i * 2 * 60 * 1000);
-
-  data.push({
-    time: time.getHours().toString() + ":" + time.getMinutes().toString(),
-    temperature: Math.floor(Math.random() * (35 - 15 + 1)) + 15,
-    humidity: Math.floor(Math.random() * (80 - 20 + 1)) + 20,
-  });
-}
-
-console.log(data);
-
-export default function Chart({ id }: { id: string }) {
+export default function Chart({ data }: { data: FormattedState[] }) {
   return (
     <ResponsiveContainer width={"100%"} height={250}>
       <AreaChart
@@ -50,6 +35,7 @@ export default function Chart({ id }: { id: string }) {
           style={{
             fontSize: "0.8rem",
           }}
+          reversed={true}
         />
         <YAxis
           style={{

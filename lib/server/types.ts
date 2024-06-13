@@ -15,3 +15,9 @@ export enum Status {
   UNHEALTHY,
   UNSET,
 }
+
+export type FormattedState = {
+  time: string;
+  temperature: number;
+  humidity: number;
+};
