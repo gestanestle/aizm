@@ -28,4 +28,4 @@ export const updateSettings = (s: InsertSettings) =>
     .where(eq(settings.id, s.id));
 
 export const insertConditions = (c: InsertConditions) =>
-  db.insert(conditions).values(c);
+  db.insert(conditions).values(c).onConflictDoNothing();

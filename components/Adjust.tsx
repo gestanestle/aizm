@@ -1,8 +1,7 @@
 "use client";
 
 import { adjustParameters } from "@/lib/actions/adjust-parameters";
-import mqtt from "mqtt";
-import { redirect } from "next/navigation";
+import { useClient } from "@/lib/client/mqtt";
 import { useState } from "react";
 
 export default function Adjust({ id }: { id: string }) {
@@ -11,25 +10,12 @@ export default function Adjust({ id }: { id: string }) {
   const [tempRange, setTempRange] = useState(0);
   const [humidityRange, setHumidtyRange] = useState(0);
 
-  const user = process.env.NEXT_PUBLIC_MQTT_USER;
-  const pass = process.env.NEXT_PUBLIC_MQTT_PASS;
-  const host = process.env.NEXT_PUBLIC_MQTT_HOST;
-  const port = process.env.NEXT_PUBLIC_MQTT_PORT;
-  const topic = "aizm/settings";
-
-  const client = mqtt.connect(String("ws://" + host + "/mqtt"), {
-    protocol: "ws",
-    username: user,
-    password: pass,
-    host: host,
-    port: Number(port),
-    clean: true,
-    reconnectPeriod: 1000, // ms
-    connectTimeout: 30 * 1000, // ms
-  });
+  const client = useClient();
 
   const publishSettings = async () => {
     console.log("Publishing...");
+
+    const topic = "aizm/settings";
     const payload = {
       id: id,
       temp: temp,
@@ -37,6 +23,7 @@ export default function Adjust({ id }: { id: string }) {
       tempRange: tempRange,
       humidityRange: humidityRange,
     };
+
     client.on("connect", () => {
       client.subscribe(topic, (err) => {
         if (!err) {

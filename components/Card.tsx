@@ -69,7 +69,7 @@ export default function Card({
               <div className="stat-title">
                 <p className="font-semibold">Humidity</p>
               </div>
-              <div className="stat-value text-secondary">{ch}</div>
+              <div className="stat-value text-secondary">{ch} %</div>
               <div className="stat-desc">
                 <p className="text-sm">
                   Desired humidity: {dh} % &plusmn; {dhr}

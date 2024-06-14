@@ -1,5 +1,6 @@
 import AddMachine from "@/components/AddMachine";
 import Card from "@/components/Card";
+import Subscriber from "@/components/Subscriber";
 import { queryConditions, queryMachines } from "@/lib/server/queries";
 import { SelectConditions, SelectMachine, Status } from "@/lib/server/types";
 import { auth } from "@clerk/nextjs/server";
@@ -77,6 +78,7 @@ export default async function Home() {
           />
         ))}
       </div>
+      <Subscriber />
     </main>
   );
 }

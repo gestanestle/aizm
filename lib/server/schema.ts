@@ -29,8 +29,10 @@ export const settings = pgTable("settings", {
 });
 
 export const conditions = pgTable("conditions", {
-  id: varchar("id").references(() => machines.id),
-  time: timestamp("time", { precision: 4, withTimezone: true }).notNull(),
+  id: varchar("id")
+    .references(() => machines.id)
+    .notNull(),
+  time: timestamp("time", { withTimezone: false }).notNull().unique(),
   temp: real("temp").notNull(),
   humidity: real("humidity").notNull(),
 });
