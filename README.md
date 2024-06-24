@@ -1,5 +1,5 @@
-# AZIM Setting and Monitoring System
-This web application must run alongside the AIZM hardware machine, whose code and schematic is provided in `/hardware` directory.  
+# AIZM Control and Monitoring System
+This web application must run alongside the AIZM hardware machine whose code and schematic are provided in the `/hardware` directory.
 
 
  Website preview           |   Website preview
@@ -44,6 +44,9 @@ This application uses [Timescaledb](https://www.timescale.com/). Run a local or 
 If you want to initialize a seeded dockerized database to see the UI in action, run the following command:
 
 `docker-compose up -d ` 
+
+_Note: Make sure to have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed in your system._
+
 
 ## Get started
 
