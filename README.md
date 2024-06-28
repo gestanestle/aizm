@@ -1,5 +1,5 @@
 # AIZM Control and Monitoring System
-This web application must run alongside the AIZM hardware machine whose code and schematic are provided in the `/hardware` directory.
+This web application must run alongside the AIZM hardware machine whose source code and schematic are provided inside the `/firmware` directory.
 
 
  Website preview           |   Website preview
