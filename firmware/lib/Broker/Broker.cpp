@@ -35,12 +35,11 @@ void Broker::setCtrlParams(
 }
 
 void callback(char *topic, byte *payload, unsigned int length) {
-    if (topic != topic_in) return; 
-    
+
     Serial.println("-----------------------");
     Serial.print("Message arrived in topic: ");
     Serial.println(topic);
-    Serial.print("Message:");
+    Serial.print("Message: ");
 
     String message;
 
@@ -79,10 +78,30 @@ char *serialize(const char *key1, const char * value1, const char *key2, float v
   return mapChar;
 }
 
+void reconnect() {
+  while (!client.connected()) {
+    Serial.println("Attempting MQTT connection...");
+    if (client.connect("ESP32-Client", mqtt_username, mqtt_password)) {
+      Serial.println("Public EMQX MQTT broker connected!");
+    } else {
+      Serial.print("failed with state ");
+      Serial.print(client.state());
+      Serial.println(" try again in 2 seconds");
+      delay(2000);
+    }
+  }
+
+  // Subscribe
+  client.subscribe(topic_in);
+  Serial.println("Subscribed to topic successful.");
+}
+
 void Broker::init(const char * mid) {
     machine_id = mid;
     client.setServer(mqtt_broker, mqtt_port);
     client.setCallback(callback);
+
+    reconnect();
 }
 
 void Broker::publish(float tmp, float rh, String time) {
@@ -91,4 +110,9 @@ void Broker::publish(float tmp, float rh, String time) {
     client.publish(topic_out, message);
 }
 
+
+void Broker::loop() {
+    if (!client.connected()) reconnect();
+    client.loop();
+}
 
