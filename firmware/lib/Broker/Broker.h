@@ -22,6 +22,7 @@ class Broker {
         );
         void init(const char * mid);
         void publish(float tmp, float rh, String time);
+        void loop();
 };
 
 

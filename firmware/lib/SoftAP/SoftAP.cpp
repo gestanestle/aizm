@@ -47,7 +47,6 @@ void SysProvEvent(arduino_event_t *sys_event) {
 }
 
 void SoftAP::connect() {
-  Serial.begin(115200);
   WiFi.onEvent(SysProvEvent);
 
   Serial.println("Begin Provisioning using Soft AP");

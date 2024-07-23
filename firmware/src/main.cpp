@@ -12,7 +12,7 @@ Broker broker(ctrl);
 
 const char* ntpServer = "pool.ntp.org";
 const long  gmtOffset_sec = 28800;
-const int   daylightOffset_sec = 3600;
+const int   daylightOffset_sec = 0;
 
 char *getTime() {
     time_t timer;
@@ -31,7 +31,7 @@ char *getTime() {
 }
 
 void setup() {
-
+    Serial.begin(115200);
     softap.connect();
     ctrl.init();
     broker.init(MACHINE_ID);
@@ -40,7 +40,7 @@ void setup() {
 }
 
 void loop() {
-
+    broker.loop();
     ctrl.ctrlTmp();
     ctrl.ctrlRh();
     broker.publish(ctrl.getTmp(), ctrl.getRh(), getTime());
