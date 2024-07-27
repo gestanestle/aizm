@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 import AddMachine from "@/components/AddMachine";
 import Card from "@/components/Card";
 import Subscriber from "@/components/Subscriber";
