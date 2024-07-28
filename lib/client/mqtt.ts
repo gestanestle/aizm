@@ -6,8 +6,8 @@ const host = process.env.NEXT_PUBLIC_MQTT_HOST;
 const port = process.env.NEXT_PUBLIC_MQTT_PORT;
 
 export const useClient = () => {
-  const mqttClient = mqtt.connect(String("ws://" + host + "/mqtt"), {
-    protocol: "ws",
+  const mqttClient = mqtt.connect(String("wss://" + host + "/mqtt"), {
+    protocol: "wss",
     username: user,
     password: pass,
     host: host,
