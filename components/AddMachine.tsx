@@ -21,9 +21,12 @@ export default function AddMachine({ uid }: { uid: string }) {
     if (isToasting) {
       const timeoutId = setTimeout(() => {
         setIsToasting(false);
-      }, 3000);
+      }, 1000);
 
-      return () => clearTimeout(timeoutId);
+      return () => {
+        clearTimeout(timeoutId);
+        location.reload();
+      }
     } else {
       closeModal();
     }

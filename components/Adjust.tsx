@@ -29,6 +29,7 @@ export default function Adjust({ id }: { id: string }) {
         if (!err) {
           client.publish(topic, JSON.stringify(payload));
           console.log("Publish successful!");
+          location.reload();
         } else {
           console.log(err);
         }
@@ -86,7 +87,7 @@ export default function Adjust({ id }: { id: string }) {
                 value={temp}
                 onChange={(e) => setTemp(Number(e.target.value))}
                 className="range range-primary"
-                step={0.1}
+                step={0.5}
               />
               <div className="w-full flex justify-between text-xs px-2">
                 <span>|</span>
@@ -129,7 +130,7 @@ export default function Adjust({ id }: { id: string }) {
                 value={humidity}
                 onChange={(e) => setHumidty(Number(e.target.value))}
                 className="range range-secondary"
-                step={0.1}
+                step={0.5}
               />
               <div className="w-full flex justify-between text-xs px-2">
                 <span>|</span>
