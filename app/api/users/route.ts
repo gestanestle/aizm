@@ -11,8 +11,8 @@ export async function POST(request: Request) {
       lname: req.data.last_name,
     };
 
-    await insertUser(user);
-    console.log("New user: " + user.id);
+    const users = await insertUser(user);
+    console.log("New user: " + users[0].id);
   } catch (err) {
     console.log(err);
   }

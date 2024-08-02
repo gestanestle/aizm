@@ -8,7 +8,7 @@ import {
 import { db } from "./db";
 import { conditions, machines, settings, users } from "./schema";
 
-export const insertUser = (u: InsertUser) => db.insert(users).values(u);
+export const insertUser = (u: InsertUser) => db.insert(users).values(u).returning({ id: users.id });
 
 export const insertMachine = (m: InsertMachine) =>
   db.insert(machines).values(m);
