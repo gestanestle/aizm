@@ -15,6 +15,7 @@ type MachineState = {
   dtr: number;
   dhr: number;
   s: Status;
+  t: Date;
 };
 
 export default async function Home() {
@@ -33,13 +34,14 @@ export default async function Home() {
       dt: m.settings.temp,
       dh: m.settings.humidity,
       dtr: m.settings.tRange,
-      dhr: m.settings.hRange,
+      dhr: m.settings.hRange
     };
 
     if (c[0]) {
       machine.id = m.id;
       machine.ct = c[0].temp;
       machine.ch = c[0].humidity;
+      machine.t = c[0].time;
 
       const isHealthy =
         machine.ct < machine.dt + machine.dtr &&
@@ -76,6 +78,7 @@ export default async function Home() {
             dtr={card.dtr}
             dhr={card.dhr}
             s={card.s}
+            t={card.t}
           />
         ))}
       </div>

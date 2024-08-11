@@ -12,6 +12,7 @@ export default function Card({
   dtr,
   dhr,
   s,
+  t
 }: {
   id: string;
   ct: number;
@@ -21,6 +22,7 @@ export default function Card({
   dtr: number;
   dhr: number;
   s: Status;
+  t: Date;
 }) {
   return (
     <div className="w-5/6">
@@ -32,6 +34,11 @@ export default function Card({
               <Adjust key={id} id={id} />
             </div>
           </h2>
+          {s != Status.UNSET && (
+            <div>
+              <p className="font-semibold text-sm">Last updated at: {t.toUTCString()}</p>
+            </div>
+          )}
           <div className="stats stats-vertical shadow">
             <div className="stat gap-y-2">
               <div className="stat-figure text-primary">
