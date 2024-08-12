@@ -37,6 +37,10 @@ Tick the events related to `user` to receive user events.
 
 Copy the API Keys to `.env.local`. Refer to `.env.example` for the required environment variables.
 
+## Go Server
+
+A dedicated Go server is needed for this project to continuously monitor the status updates broadcasted by ESP32 devices through an MQTT broker. This server operates non-stop and is housed in the repository found  [here](https://github.com/gestanestle/aizm-go-server.git).
+
 ## Database
 
 This application uses [Timescaledb](https://www.timescale.com/). Run a local or docker instance of timescaledb with the schema provided in `./sql/schema.sql`. 
