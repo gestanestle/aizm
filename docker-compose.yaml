@@ -11,6 +11,7 @@ services:
     restart: always
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
+      - ./tmp:/tmp
       - timescale_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]

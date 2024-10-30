@@ -14,9 +14,9 @@ type MachineState = {
   dh: number;
   dtr: number;
   dhr: number;
-  s: Status;
   t: Date;
 };
+
 
 export default async function Home() {
   const { userId } = auth();
@@ -42,19 +42,10 @@ export default async function Home() {
       machine.ct = c[0].temp;
       machine.ch = c[0].humidity;
       machine.t = c[0].time;
-
-      const isHealthy =
-        machine.ct < machine.dt + machine.dtr &&
-        machine.ct > machine.dt - machine.dtr &&
-        machine.ch < machine.dh + machine.dhr &&
-        machine.ch > machine.dh - machine.dhr;
-
-      machine.s = isHealthy ? Status.HEALTHY : Status.UNHEALTHY;
     } else {
       machine.id = m.id;
       machine.ct = 0;
       machine.ch = 0;
-      machine.s = Status.UNSET;
     }
 
     return machine;
@@ -77,7 +68,6 @@ export default async function Home() {
             dh={card.dh}
             dtr={card.dtr}
             dhr={card.dhr}
-            s={card.s}
             t={card.t}
           />
         ))}

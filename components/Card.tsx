@@ -11,7 +11,6 @@ export default function Card({
   dh,
   dtr,
   dhr,
-  s,
   t
 }: {
   id: string;
@@ -21,7 +20,6 @@ export default function Card({
   dh: number;
   dtr: number;
   dhr: number;
-  s: Status;
   t: Date;
 }) {
   return (
@@ -34,7 +32,7 @@ export default function Card({
               <Adjust key={id} id={id} />
             </div>
           </h2>
-          {s != Status.UNSET && (
+          {t != null && (
             <div>
               <p className="font-semibold text-sm">Last updated at: {t.toUTCString()}</p>
             </div>
@@ -88,25 +86,6 @@ export default function Card({
             <Monitoring id={id} />
           </div>
 
-          <div className="container-fluid h-12 border-y-2 border-indigo-200 mt-4">
-            <div className="flex justify-center items-center h-full">
-              {s == Status.HEALTHY && (
-                <p className="text-center font-semibold">
-                  Status: <span className="text-green-600">HEALTHY</span>
-                </p>
-              )}
-              {s == Status.UNHEALTHY && (
-                <p className="text-center">
-                  Status: <span className="text-red-600">UNHEALTHY</span>
-                </p>
-              )}
-              {s == Status.UNSET && (
-                <p className="text-center">
-                  Status: <span className="text-yellow-600">UNSET</span>
-                </p>
-              )}
-            </div>
-          </div>
         </div>
       </div>
     </div>
