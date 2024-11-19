@@ -11,7 +11,7 @@ export default function Card({
   dh,
   dtr,
   dhr,
-  t
+  t,
 }: {
   id: string;
   ct: number;
@@ -28,13 +28,13 @@ export default function Card({
         <div className="card-body">
           <h2 className="card-title flex">
             <div className="flex-auto">Machine {id}</div>
-            <div className="flex-none">
-              <Adjust key={id} id={id} />
-            </div>
+            <div className="flex-none">{/* <Adjust key={id} id={id} /> */}</div>
           </h2>
           {t != null && (
             <div>
-              <p className="font-semibold text-sm">Last updated at: {t.toUTCString()}</p>
+              <p className="font-semibold text-sm">
+                Last updated at: {t.toUTCString()}
+              </p>
             </div>
           )}
           <div className="stats stats-vertical shadow">
@@ -85,7 +85,6 @@ export default function Card({
           <div className="hidden md:block bg-base-300 rounded-lg p-4">
             <Monitoring id={id} />
           </div>
-
         </div>
       </div>
     </div>
