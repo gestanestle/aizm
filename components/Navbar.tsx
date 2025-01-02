@@ -28,7 +28,7 @@ export default function Navbar() {
                 />
               </svg>
             </div>
-            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-white">
               <li>
                 <a>Dashboard</a>
               </li>
@@ -41,7 +41,7 @@ export default function Navbar() {
             </ul>
           </div>
           <div className="flex-1">
-            <a className="btn btn-ghost text-xl" href="/">
+            <a className="btn btn-ghost text-xl text-white" href="/">
               AIZM
             </a>
           </div>

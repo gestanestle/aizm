@@ -27,12 +27,14 @@ export default function Card({
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title flex">
-            <div className="flex-auto">Machine {id}</div>
+            <div className="flex-auto">
+              <p className="text-white">Machine {id}</p>
+            </div>
             <div className="flex-none">{/* <Adjust key={id} id={id} /> */}</div>
           </h2>
           {t != null && (
             <div>
-              <p className="font-semibold text-sm">
+              <p className="font-semibold text-sm text-white">
                 Last updated at: {t.toUTCString()}
               </p>
             </div>
