@@ -49,6 +49,7 @@ export default function Card({
                   width={80}
                   height={80}
                   priority
+                  color="white"
                 />
               </div>
               <div className="stat-title">
@@ -71,6 +72,7 @@ export default function Card({
                   width={80}
                   height={80}
                   priority
+                  color="white"
                 />
               </div>
               <div className="stat-title">
